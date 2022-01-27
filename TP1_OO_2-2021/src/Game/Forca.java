@@ -1,0 +1,453 @@
+package Game;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Forca {
+	
+	public static String[][] dados = new String[51][51];
+	public static Scanner ler = new Scanner(System.in);
+	public static void main(String[] args) {
+
+
+		constroiDados();
+		System.out.println("                  |''''''''''''''''''''''''''| ");
+		System.out.println("                  |BEM VINDO AO JOGO DA FORCA| ");
+		System.out.println("                  |,,,,,,,,,,,,,,,,,,,,,,,,,,|\n ");
+		menu();
+		
+
+	}
+	public static void menu() {
+		System.out.println("Escolha entre uma das opções abaixo:\n");
+		System.out.println("	1. Gerenciar Temas.\n	2. Gerenciar Palavras.\n 	3. Jogar.\n	4. Sair.\n");
+		System.out.println("Digite um numero de 1 á 4:");
+		int n1 = ler.nextInt();
+		switch (n1) {
+		  case 1:
+			  tela();
+			  gerenciarTema();
+		    break;
+		  case 2:
+			  tela();
+			  gerenciarPalavras();
+		    break;
+		  case 3:
+			  tela();
+			  tema();
+		    break;
+		  case 4:
+			  System.out.println("Até logo ;D");
+			  System.exit(0);
+		    break;
+		  default:
+			  System.out.println("==============Operação inválida==============");
+			  menu();
+		}
+	}
+	public static void gerenciarPalavras() {
+		System.out.println("GERENCIADOR DE PALAVRAS\n");
+		System.out.println("	1. Cadastrar Palavra.");
+		System.out.println("	2. Excluir Palavra.");
+		System.out.println("	3. Buscar Palavra.");
+        System.out.println("	4. Listar Palavras.\n");
+		
+		int opcao;
+		do {
+    		System.out.println("Selecione uma opção ou digite 0 para voltar ao menu principal.\n");
+    		opcao = ler.nextInt();
+    	}while( opcao != 1 && opcao != 2 && opcao != 3 && opcao != 0 && opcao != 4);
+		if(opcao == 0) {
+			tela();
+			menu();
+		}else if(opcao == 1) {
+			tela();
+			cadastraPalavra();
+		}else if(opcao == 2) {
+			tela();
+			excluiPalavra();
+		}else if(opcao == 3) {
+			buscaPalavra();
+		}else if(opcao == 4) {
+			listar();
+		}
+	}
+	private static void listar() {
+		System.out.println("LISTAGEM DE PALAVRAS\n");
+        System.out.println("Selecione um tema que deseja listar as palavras ou digite 0 para voltar.\n");
+		for (int j=0; j< 51; j++) {
+			if(dados[j][0] != null) {
+				System.out.println( "	" + (j+1) + ". " + dados[j][0] +". ");
+			}
+		}
+		System.out.println("\ndigite o numero correspondente ao tema de sua escolha:");
+		int n2, n1 = ler.nextInt();
+		if(n1 == 0) {
+			tela();
+			gerenciarPalavras();
+		}else if(n1>0 && n1<52 && dados[n1-1][0] != null) {
+            System.out.println("\nPalavras em "+dados[n1-1][0] + ":\n");
+            for (int j=1; j< 51; j++) {
+			    if(dados[n1-1][j] != null) {
+				System.out.println( "	" + (j) + ". " + dados[n1-1][j] +". ");
+			    }
+		    }
+		    System.out.println("\ndigite 0 para voltar ou qualquer numero para selecionar outro tema:\n");
+		    n2 = ler.nextInt();
+		    if(n2 == 0) {
+			    tela();
+			    gerenciarPalavras();;
+		    }else {
+			listar();
+		    }
+        }else {
+			System.out.println("==============Operação inválida==============");
+			listar();
+		}
+		
+	}
+	private static void buscaPalavra() {
+		System.out.println("BUSCA DE PALAVRA\n");
+		int n1 = 0;
+		System.out.println("Digite o tema que deseja buscar:");
+		String tema = ler.next();
+		for (int j=0; j< 51; j++) {
+            for (int i=1; i< 51; i++) {
+			    if(tema.equals(dados[j][i])) {
+			    	tela();
+			    	System.out.println("==============Palavra encontrada no tema  "+(j+1)+" - "+ dados[j][0]+"==============");
+			    	n1=1;
+			    	break;
+			    }
+            }
+		}
+		if(n1 == 0) {
+			tela();
+			System.out.println("==============Palavra não encontrada==============");
+		}
+		gerenciarPalavras();
+	}
+	private static void excluiPalavra() {
+		System.out.println("EXCLUSÃO DE PALAVRA\n");
+        System.out.println("Selecione um tema que deseja excluir uma palavra ou digite 0 para voltar ao menu principal.\n");
+		for (int j=0; j< 51; j++) {
+			if(dados[j][0] != null) {
+				System.out.println( "	" + (j+1) + ". " + dados[j][0] +". ");
+			}
+		}
+		System.out.println("\ndigite o numero correspondente ao tema de sua escolha:");
+		int n2, n1 = ler.nextInt();
+		if(n1 == 0) {
+			tela();
+			gerenciarPalavras();
+		}else if(n1>0 && n1<52 && dados[n1-1][0] != null) {
+            System.out.println("\nPalavras em "+dados[n1-1][0] + ".\n");
+            for (int j=1; j< 51; j++) {
+			    if(dados[n1-1][j] != null) {
+				System.out.println( "	" + (j) + ". " + dados[n1-1][j] +". ");
+			    }
+		    }
+		    System.out.println("\ndigite o numero correspondente a palavra que deseja excluir ou 0 para voltar:");
+		    n2 = ler.nextInt();
+		    if(n2 == 0) {
+			    tela();
+			    excluiPalavra();
+		    }else if(n2>0 && n2<52 && dados[n1-1][n2] != null) {			
+				tela();
+				dados[n1-1][n2] = null;
+				System.out.println("==============Palavra excluida com sucesso!.==============");
+				gerenciarPalavras();			
+		    }else {
+			System.out.println("==============Operação inválida==============");
+			excluiPalavra();
+		    }
+        }else {
+			System.out.println("==============Operação inválida==============");
+			excluiPalavra();
+		}
+	}
+	private static void cadastraPalavra() {
+		System.out.println("CADASTRO DE PALAVRA\n");
+        System.out.println("Selecione um tema que deseja cadastrar uma palavra ou digite 0 para voltar ao menu principal.\n");
+		for (int j=0; j< 51; j++) {
+			if(dados[j][0] != null) {
+				System.out.println( "	" + (j+1) + ". " + dados[j][0] +". ");
+			}
+		}
+		System.out.println("\ndigite o numero correspondente ao tema de sua escolha:");
+		int n2, n1 = ler.nextInt();
+		if(n1 == 0) {
+			tela();
+			gerenciarPalavras();
+		}else if(n1>0 && n1<52 && dados[n1-1][0] != null) {
+		String palavra;
+		do {
+			n2=1;
+    		System.out.println("Digite a palavra que deseja cadastrar:\n	Obs:. não pode ser igual a uma já cadastrado.\n");
+    		palavra = ler.next();
+    		for (int j=1; j< 51; j++) {
+    			if(palavra.equals(dados[n1-1][j])) {
+    				n2=0;
+    			}
+    		}
+    	}while( n2 == 0);
+		for (int j=1; j< 51; j++) {
+			if(dados[n1-1][j] == null) {
+				dados[n1-1][j]=palavra;
+				break;
+			}
+		}
+		tela();
+		System.out.println("==============Palavra cadastrada com sucesso!==============");
+		gerenciarPalavras();
+		}else {
+            tela();
+			System.out.println("==============Operação inválida==============");
+			cadastraPalavra();
+		}
+		
+		
+	}
+	public static void gerenciarTema() {
+		System.out.println("GERENCIADOR DE TEMAS\n");
+		System.out.println("	1. Cadastrar tema.");
+		System.out.println("	2. Excluir tema.");
+		System.out.println("	3. Buscar tema.\n");
+		
+		int opcao;
+		do {
+    		System.out.println("Selecione uma opção ou digite 0 para voltar ao menu principal.\n");
+    		opcao = ler.nextInt();
+    	}while( opcao != 1 && opcao != 2 && opcao != 3 && opcao != 0);
+		if(opcao == 0) {
+			tela();
+			menu();
+		}else if(opcao == 1) {
+			tela();
+			cadastraTema();
+		}else if(opcao == 2) {
+			tela();
+			excluiTema();
+		}else if(opcao == 3) {
+			buscaTema();
+		}
+	}
+	private static void buscaTema() {
+		System.out.println("BUSCA DE TEMA\n");
+		int n1 = 0;
+		System.out.println("Digite o tema que deseja buscar:");
+		String tema = ler.next();
+		for (int j=0; j< 51; j++) {
+			if(tema.equals(dados[j][0])) {
+				tela();
+				System.out.println("==============Tema "+(j+1)+" - "+ dados[j][0]+" encontrado.==============");
+				n1=1;
+				break;
+			}
+		}
+		if(n1 == 0) {
+			tela();
+			System.out.println("==============Tema não encontrado==============");
+		}
+		gerenciarTema();
+	}
+	private static void excluiTema() {
+		System.out.println("EXCLUSÃO DE TEMA\n");
+		int n2 = 1;
+		for (int j=0; j< 51; j++) {
+			if(dados[j][0] != null) {
+				System.out.println( "	" + (j+1) + ". " + dados[j][0] +". ");
+			}
+		}
+		System.out.println("\ndigite o numero correspondente ao tema que deseja excluir ou 0 para voltar:");
+		int n1 = ler.nextInt();
+		if(n1 == 0) {
+			tela();
+			gerenciarTema();
+		}else if(n1>0 && n1<52 && dados[n1-1][0] != null) {
+			for (int j=1; j< 51; j++) {
+    			if(dados[n1-1][j] != null) {
+    				n2=0;
+    				break;
+    			}
+    		}
+			if(n2 == 0) {
+				tela();
+				System.out.println("==============Não foi possível excluir o tema. Verifique se existem palavras cadastradas nesse tema.==============");
+				excluiTema();
+			}else {
+				tela();
+				dados[n1-1][0] = null;
+				System.out.println("==============Tema excluido com sucesso!==============");
+				gerenciarTema();
+			}
+		}else {
+			System.out.println("==============Operação inválida==============");
+			excluiTema();
+		}
+		
+		
+	}
+	private static void cadastraTema() {
+		System.out.println("CADASTRO DE TEMA\n");
+		int n1 ;
+		String tema;
+		do {
+			n1=1;
+    		System.out.println("Digite o tema que deseja cadastrar:\n	Obs:. não pode ser igual a um já cadastrado.\n");
+    		tema = ler.next();
+    		for (int j=0; j< 51; j++) {
+    			if(tema.equals(dados[j][0])) {
+    				n1=0;
+    			}
+    		}
+    	}while( n1 == 0);
+		for (int j=0; j< 51; j++) {
+			if(dados[j][0] == null) {
+				dados[j][0]=tema;
+				break;
+			}
+		}
+		tela();
+		System.out.println("==============Tema cadastrado com sucesso!==============");
+		gerenciarTema();
+		
+	}
+	public static void tema() {
+
+		System.out.println("Selecione um tema para iniciar o ou digite 0 para voltar ao menu principal.\n");
+		for (int j=0; j< 51; j++) {
+			if(dados[j][0] != null) {
+				System.out.println( "	" + (j+1) + ". " + dados[j][0] +". ");
+			}
+		}
+		System.out.println("\ndigite o numero correspondente ao tema de sua escolha:");
+		int n1 = ler.nextInt();
+		if(n1 == 0) {
+			tela();
+			menu();
+		}else if(n1>0 && n1<52 && dados[n1-1][0] != null) {
+			tela();
+			game(n1-1);
+		}else {
+			System.out.println("==============Operação inválida==============");
+			tema();
+		}
+	}
+	public static void game(int t) {
+		int n1=5, n2=0,n3=0,n4=0;
+		char[] pl = sorte(t);
+		char[] resp = new char[pl.length];
+		char[] letraDigitada=new char[20];
+		char le;
+		 for (int i=0; i<resp.length;i++)
+		 {
+			 resp[i]='_';
+		 }
+		while (n1 > 0){
+			n4=0;
+			apresenta(resp, n1, letraDigitada);
+			le = verificaLetra(letraDigitada);
+	        letraDigitada[n2] = le;
+	        n2++;n3=1;
+	        for (int j=0; j< pl.length; j++){
+	 		   if (pl[j] == le){
+	 			   n4=1;
+	 			   resp[j] = le;
+	 		   }if (resp[j]=='_')
+	 			   n3=0;
+	 		   }
+	        if(n3==1)
+	        	break;
+	        if(n4 == 0)
+	        	n1--;
+	      
+	      
+		}
+		if(n3==1){
+        	System.out.println("Parabéns! Você acertou a palavra! Deseja jogar novamente?");
+        	int  fica = 0;
+        	do {
+        		System.out.println("Digite 1 para sim ou 2 para não:");
+        		fica = ler.nextInt();
+        	}while( fica != 1 && fica != 2);
+        	if(fica == 1) {
+        		tela();
+        		tema();
+        	}else {
+        		tela();
+        		menu();
+        	}
+        }
+		else {
+			System.out.println("Você perdeu! Deseja Deseja jogar novamente?");
+		}	 
+	    
+	}
+	public static char verificaLetra(char[] le){
+			String a1 = ler.next();
+		   for (int j=0; j< le.length; j++){
+		   if (le[j] == a1.charAt(0)){
+			   System.out.println("Tente outra letra!: ");
+			   verificaLetra(le);
+		   }
+		   }
+		   return a1.charAt(0);
+	}
+	public static void apresenta(char[] resp, int vid, char[] letras) {
+		tela();
+		System.out.println("	              |'''''''''''''''| ");
+		System.out.println("	              | JOGO DA FORCA | ");
+		System.out.println("	 ______       |,,,,,,,,,,,,,,,|        Vidas: "+ vid);
+		System.out.println("	|      |");
+		System.out.print("	|                       ");
+		for(int i=0; i<letras.length;i++){
+			System.out.print(letras[i]+" ");
+		}
+		System.out.println("\n	|");
+		System.out.println("	|");
+		System.out.println("	|");
+		System.out.print("	| ");
+		for(int i=0; i<resp.length;i++){
+			System.out.print(resp[i]+" ");
+		}
+		System.out.println("	");
+		System.out.println("Digite uma letra: ");
+	}
+	public static char[] sorte(int t) {
+		int n1 = 0,n2;
+		for (int j=1; j< 51; j++) {
+			if(dados[t][j] != null) {
+				n1++;
+			}
+		}
+		Random gerador = new Random();
+		n2 = gerador.nextInt(n1 - 1);
+		n2++;
+		n1 = 0;
+		for (int j=1; j< 51; j++) {
+			if(dados[t][j] != null) {
+				n1++;
+				if(n1 == n2) {
+					n1=j;
+					break;
+				}
+			}
+		}
+		char[] palavra = dados[t][n1].toCharArray(); 
+		
+		return palavra;
+	}
+	public static void tela() {
+		System.out.print( "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" );
+	}
+	public static void constroiDados() {
+		dados [0][0] = "frutas";dados [0][1] = "banana";dados [0][2] = "abacaxi";dados [0][3] = "tomate";dados [0][4] = "laranja";dados [0][5] = "graviola";
+		dados [1][0] = "animais";dados [1][1] = "girafa";dados [1][2] = "hipopotamo";dados [1][3] = "dragao-de-komodo";dados [1][4] = "cachorro";dados [1][5] = "cobra";
+		dados [2][0] = "cores";dados [2][1] = "amarelo";dados [2][2] = "marrom";dados [2][3] = "preto";dados [2][4] = "vermelho";dados [2][5] = "azul";
+
+
+		
+	}
+
+}
