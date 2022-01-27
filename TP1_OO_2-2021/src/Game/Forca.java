@@ -442,12 +442,12 @@ public class Forca {
 		System.out.print( "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" );
 	}
 	public static void constroiDados() {
-		dados [0][0] = "frutas";dados [0][1] = "banana";dados [0][2] = "abacaxi";dados [0][3] = "tomate";dados [0][4] = "laranja";dados [0][5] = "graviola";
-		dados [1][0] = "animais";dados [1][1] = "girafa";dados [1][2] = "hipopotamo";dados [1][3] = "dragao-de-komodo";dados [1][4] = "cachorro";dados [1][5] = "cobra";
-		dados [2][0] = "cores";dados [2][1] = "amarelo";dados [2][2] = "marrom";dados [2][3] = "preto";dados [2][4] = "vermelho";dados [2][5] = "azul";
+		dados [0][0] = "frutas";dados [0][1] = "banana";dados [0][2] = "abacaxi";dados [0][3] = "tomate";dados [0][4] = "laranja";dados [0][5] = "graviola";dados [0][6] = "abacate";dados [0][7] = "lichia";dados [0][8] = "uva";dados [0][9] = "pera";dados [0][10] = "manga";
+		dados [1][0] = "animais";dados [1][1] = "girafa";dados [1][2] = "hipopotamo";dados [1][3] = "dragao-de-komodo";dados [1][4] = "cachorro";dados [1][5] = "cobra";dados [1][6] = "veado";dados [1][7] = "vaca";dados [1][8] = "jabuti";dados [1][9] = "piriquito";dados [1][10] = "condor";
+		dados [2][0] = "cores";dados [2][1] = "amarelo";dados [2][2] = "marrom";dados [2][3] = "preto";dados [2][4] = "vermelho";dados [2][5] = "azul";dados [2][6] = "branco";dados [2][7] = "verde";dados [2][8] = "roxo";dados [2][9] = "rosa";dados [2][10] = "azul-marinho";
+		dados [3][0] = "profissoes";dados [3][1] = "cozinheiro";dados [3][2] = "professor";dados [3][3] = "engenheiro";dados [3][4] = "programador";dados [3][5] = "encanador";dados [3][6] = "fachineiro";dados [3][7] = "advogado";dados [3][8] = "eletricista";dados [3][9] = "motorista";dados [3][10] = "presidente";
+		dados [4][0] = "esportes";dados [4][1] = "futbool";dados [4][2] = "corrida";dados [4][3] = "volei";dados [4][4] = "futsal";dados [4][5] = "salto-com-vara";dados [4][6] = "luta";dados [4][7] = "basquete";dados [4][8] = "ciclismo";dados [4][9] = "alpinismo";dados [4][10] = "ginastica";
 
-
-		
 	}
 
 }
