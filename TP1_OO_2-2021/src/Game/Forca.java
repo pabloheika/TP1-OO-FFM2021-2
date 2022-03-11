@@ -35,29 +35,38 @@ public class Forca {
 		case 1:
 			// limpa tela com quebras de linha
 			tela();
+			// chama menu de tema
 			gerenciarTema();
 			break;
 		case 2:
 			// limpa tela com quebras de linha
 			tela();
+			// chama menu de palavras
 			gerenciarPalavras();
 			break;
 		case 3:
 			// limpa tela com quebras de linha
 			tela();
+			// chama metodo para esncolher o tema a jogar
 			tema();
 			break;
 		case 4:
+			// imprime frase de despedida
 			System.out.println("Até logo ;D");
+			// encerra o programa
 			System.exit(0);
 			break;
 		default:
+			// imprime frase
 			System.out.println("==============Operação inválida==============");
+			// chama este metodo menu
 			menu();
 		}
 	}
 
+	// metodo menu de palavras
 	public static void gerenciarPalavras() {
+		// imprime frases
 		System.out.println("GERENCIADOR DE PALAVRAS\n");
 		System.out.println("	1. Cadastrar Palavra.");
 		System.out.println("	2. Excluir Palavra.");
@@ -65,77 +74,103 @@ public class Forca {
 		System.out.println("	4. Listar Palavras.\n");
 
 		int opcao;
+		// repete pedido de leitura enquanto nao for uma opcao valida
 		do {
 			System.out.println("Selecione uma opção ou digite 0 para voltar ao menu principal.\n");
 			opcao = ler.nextInt();
 		} while (opcao != 1 && opcao != 2 && opcao != 3 && opcao != 0 && opcao != 4);
+		// compara escolha
 		if (opcao == 0) {
 			// limpa tela com quebras de linha
 			tela();
+			// chama metodo menu
 			menu();
 		} else if (opcao == 1) {
 			// limpa tela com quebras de linha
 			tela();
+			// chama metodo de cadastro de palavra
 			cadastraPalavra();
 		} else if (opcao == 2) {
 			// limpa tela com quebras de linha
 			tela();
+			// chama metodo de exclusao de palavra
 			excluiPalavra();
 		} else if (opcao == 3) {
+			// chama metodo de busca de palavra
 			buscaPalavra();
 		} else if (opcao == 4) {
+			// chama metodo para lustar as palavras
 			listar();
 		}
 	}
 
+	// metodo de listagem de palavras
 	private static void listar() {
 		System.out.println("LISTAGEM DE PALAVRAS\n");
 		System.out.println("Selecione um tema que deseja listar as palavras ou digite 0 para voltar.\n");
+		// imprime os temas cadastrados
 		for (int j = 0; j < 51; j++) {
 			if (dados[j][0] != null) {
 				System.out.println("	" + (j + 1) + ". " + dados[j][0] + ". ");
 			}
 		}
 		System.out.println("\ndigite o numero correspondente ao tema de sua escolha:");
+		// declara variaveis e ler a escolha
 		int n2, n1 = ler.nextInt();
+		// compara escolha
 		if (n1 == 0) {
 			// limpa tela com quebras de linha
 			tela();
+			// chama metodo do menu para gerenciar palavras
 			gerenciarPalavras();
-		} else if (n1 > 0 && n1 < 52 && dados[n1 - 1][0] != null) {
+		}
+		// compara para ver se a esconha é valida
+		else if (n1 > 0 && n1 < 52 && dados[n1 - 1][0] != null) {
 			System.out.println("\nPalavras em " + dados[n1 - 1][0] + ":\n");
+			// imprime as palavras
 			for (int j = 1; j < 51; j++) {
 				if (dados[n1 - 1][j] != null) {
 					System.out.println("	" + (j) + ". " + dados[n1 - 1][j] + ". ");
 				}
 			}
 			System.out.println("\ndigite 0 para voltar ou qualquer numero para selecionar outro tema:\n");
+			// ler entrada
 			n2 = ler.nextInt();
+			// compara entrada
 			if (n2 == 0) {
 				// limpa tela com quebras de linha
 				tela();
+				// chama metodo do menu para gerenciar palavras
 				gerenciarPalavras();
 				;
 			} else {
+				// chama o proprio metodo para começar novamente
 				listar();
 			}
 		} else {
+			// exibe frase
 			System.out.println("==============Operação inválida==============");
+			// chama o proprio metodo para começar novamente
 			listar();
 		}
 
 	}
 
+	// metodo de busca de palavra
 	private static void buscaPalavra() {
 		System.out.println("BUSCA DE PALAVRA\n");
 		int n1 = 0;
-		System.out.println("Digite o tema que deseja buscar:");
+		System.out.println("Digite a palavra que deseja buscar:");
+		// ler palavra
 		String tema = ler.next();
+		// roda toda a matrix
 		for (int j = 0; j < 51; j++) {
 			for (int i = 1; i < 51; i++) {
+				// compara Strings da matrix com a digitada
 				if (tema.equals(dados[j][i])) {
 					// limpa tela com quebras de linha
 					tela();
+					// imprime frase com resultado positivo
 					System.out.println("==============Palavra encontrada no tema  " + (j + 1) + " - " + dados[j][0]
 							+ "==============");
 					n1 = 1;
@@ -146,8 +181,10 @@ public class Forca {
 		if (n1 == 0) {
 			// limpa tela com quebras de linha
 			tela();
+			// imprime frase
 			System.out.println("==============Palavra não encontrada==============");
 		}
+		// chama metodo do menu para gerenciar palavras
 		gerenciarPalavras();
 	}
 
