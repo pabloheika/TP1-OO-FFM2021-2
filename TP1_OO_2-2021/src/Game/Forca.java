@@ -381,6 +381,18 @@ public class Forca {
         }
 		else {
 			System.out.println("Você perdeu! Deseja Deseja jogar novamente?");
+			int  fica = 0;
+        	do {
+        		System.out.println("Digite 1 para sim ou 2 para não:");
+        		fica = ler.nextInt();
+        	}while( fica != 1 && fica != 2);
+        	if(fica == 1) {
+        		tela();
+        		tema();
+        	}else {
+        		tela();
+        		menu();
+        	}
 		}	 
 	    
 	}
